@@ -1,0 +1,30 @@
+{
+  "name": "cotacao_de_viagem",
+  "version": "1.0.0",
+  "description": "Programa capaz de calcular o menor preço possível de passagens",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -- -r esm -r dotenv/config src/index.js",
+    "start": "pm2 start src/index.js --watch --no-daemon --node-args=\"-r esm -r dotenv/config\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrcsmotta1/cotacao_de_viagem.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrcsmotta1/cotacao_de_viagem/issues"
+  },
+  "homepage": "https://github.com/mrcsmotta1/cotacao_de_viagem#readme",
+  "dependencies": {
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "pm2": "^4.4.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
