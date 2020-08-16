@@ -4,6 +4,6 @@ const router = express.Router();
 
 import CotacaoController from "../../app/controllers/CotacaoController";
 router.post("/quote/insert", CotacaoController.create);
-// router.put("/quote/:partida/:rota", CotacaoController.list);
+router.get("/quote/:from/:to", CotacaoController.list);
 
 export default router;
