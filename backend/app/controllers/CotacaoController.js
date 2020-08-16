@@ -57,7 +57,7 @@ export default {
               id: numberLinesCount >= 1 ? numberLinesCount + 1 : 1,
               from: from,
               to: to,
-              price: price,
+              price: parseInt(price),
             },
           ];
 
@@ -65,6 +65,55 @@ export default {
             .writeRecords(dataInsert)
             .then(() => console.log("The CSV file was written successfully"));
           res.status(200).json({ message: "Create" });
+        });
+      }
+    } catch (error) {
+      return res.status(415).json({ error: "Create failed" });
+    }
+  },
+
+  async list(req, res) {
+    const from = req.params.from.toUpperCase();
+    const to = req.params.to.toUpperCase();
+
+    try {
+      if (!isNaN(to) || !isNaN(from)) {
+        return res
+          .status(400)
+          .json({ message: "Incomplete data to seek travel budget" });
+      } else {
+        const dataExist = [
+          {
+            from: from,
+            to: to,
+          },
+        ];
+
+        fs.readFile(pathFile, async (err, data) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+          const numRow = await neatCsv(data);
+          const numberLinesCount = Object.keys(numRow).length;
+
+          console.log(numberLinesCount);
+
+          if (numberLinesCount >= 1) {
+            const checks = checkForSearch(numRow, dataExist);
+            const checksMin = checkForMin(checks);
+
+            if (checks.length > 0) {
+              return res.status(200).json({
+                route: `${from},${to}`,
+                price: checksMin.Price,
+              });
+            }
+          } else {
+            return res
+              .status(204)
+              .json({ message: "There are no registered data" });
+          }
         });
       }
     } catch (error) {
@@ -86,3 +135,29 @@ function checkIfThereIs(arrayCsv, arrayInsert) {
 
   return exist;
 }
+
+function checkForSearch(arrayCsv, arrayInsert) {
+  let fromInsert = arrayInsert[0].from;
+  let toInsert = arrayInsert[0].to;
+
+  let exist = _.filter(arrayCsv, {
+    From: `${fromInsert}`,
+    To: `${toInsert}`,
+  });
+
+  return exist;
+}
+
+function checkForMin(arraySelect) {
+  arrayWitshString(arraySelect);
+  let exist = _.minBy(arraySelect, "Price");
+
+  return exist;
+}
+
+const arrayWitshString = (arrayValueString) => {
+  arrayValueString.map((d) => {
+    d.Price = parseInt(d.Price);
+    return d;
+  });
+};
