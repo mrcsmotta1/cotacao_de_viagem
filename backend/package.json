@@ -21,6 +21,7 @@
   "homepage": "https://github.com/mrcsmotta1/cotacao_de_viagem#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "csv-writer": "^1.6.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
