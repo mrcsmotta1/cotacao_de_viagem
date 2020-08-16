@@ -20,8 +20,12 @@
   },
   "homepage": "https://github.com/mrcsmotta1/cotacao_de_viagem#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "lodash": "^4.17.20",
+    "neat-csv": "^5.2.0",
     "pm2": "^4.4.0"
   },
   "devDependencies": {
