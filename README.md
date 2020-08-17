@@ -15,7 +15,7 @@
 ## Quick Start
 
 - Clone or download this repository
-- Go inside of directory, `cd cotacao_de_viagem`
+- Go inside of directory `cd cotacao_de_viagem`
 - Run this command `make up`
 
 ## Environments
