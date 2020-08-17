@@ -106,6 +106,7 @@ module.exports = {
               { id: "from", title: "From" },
               { id: "to", title: "To" },
               { id: "price", title: "Price" },
+              { id: "date", title: "Date" },
             ],
           });
 
@@ -115,6 +116,7 @@ module.exports = {
               from: from,
               to: to,
               price: price,
+              date: dateNow(),
             },
           ];
 
@@ -135,8 +137,8 @@ module.exports = {
    *  get:
    *    tags:
    *    - Peças
-   *    summary: 'Exibe uma Cotação de Viagem cadastradas'
-   *    description: 'Exibe uma Cotação de Viagem cadastradas'
+   *    summary: 'Exibe uma Cotação de Viagem cadastrada'
+   *    description: 'Exibe uma Cotação de Viagem cadastrada'
    *    produces:
    *    - application/json
    *    parameters:
@@ -272,4 +274,16 @@ const arrayWitshString = (arrayValueString) => {
     d.Price = parseInt(d.Price);
     return d;
   });
+};
+
+const dateNow = () => {
+  const date = new Date();
+  const dateToBr =
+    ("0" + date.getDate()).substr(-2) +
+    "/" +
+    ("0" + (date.getMonth() + 1)).substr(-2) +
+    "/" +
+    date.getFullYear();
+
+  return dateToBr;
 };
