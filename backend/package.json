@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc --reporter=html --reporter=text mocha src/test/cotacao.test.js --exit",
-    "dev": "nodemon -- -r esm -r dotenv/config src/index.js",
-    "start": "pm2 start src/index.js --watch --no-daemon --node-args=\"-r esm -r dotenv/config\""
+    "dev": "nodemon -- -r dotenv/config src/index.js",
+    "start": "pm2 start src/index.js --watch --no-daemon --node-args=\"-r dotenv/config\""
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,6 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "csv-writer": "^1.6.0",
-    "esm": "^3.2.25",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "lodash": "^4.17.20",
