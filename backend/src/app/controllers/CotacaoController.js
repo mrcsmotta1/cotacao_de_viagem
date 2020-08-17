@@ -3,8 +3,65 @@ const fs = require("fs");
 const neatCsv = require("neat-csv");
 
 const pathFile = require("path").resolve(__dirname, "../../csv/routes.csv");
-// console.log(process.cwd())
+
 module.exports = {
+  /**
+   * @swagger
+   * /quote/insert:
+   *  post:
+   *    tags:
+   *    - Cotação
+   *    summary: 'Insere uma nova Cotação de Viagem'
+   *    description: 'Insere uma nova Cotação de Viagem'
+   *    produces:
+   *    - application/json
+   *    parameters:
+   *    - in: body
+   *      name: body
+   *      description: Insere uma nova Cotação de Viagem
+   *      required: true
+   *      schema:
+   *        type: object
+   *        properties:
+   *          from:
+   *             type: string
+   *             example: "BRC"
+   *          to:
+   *             type: string
+   *             example: "CA"
+   *          price:
+   *             type: integer
+   *             format: integer
+   *             example: 10
+   *    responses:
+   *       201:
+   *         description: "Create"
+   *         schema:
+   *          $ref: "#/definitions/Insere_cotacao"
+   *       400:
+   *          description: "Incomplete data to save travel quote"
+   *       409:
+   *          description: "Duplicate data"
+   *       415:
+   *          description: "Create failed"
+   * definitions:
+   *    Insere_cotacao:
+   *       type: object
+   *       example:
+   *         doc:
+   *          from: BRC
+   *          to: CA
+   *          price: 10
+   *       properties:
+   *         from:
+   *            type: string
+   *         to:
+   *            type: string
+   *         price:
+   *            type: integer
+   *       xml:
+   *          name: 'Cotacao'
+   */
   async create(req, res) {
     try {
       const from = req.body.from.toUpperCase();
@@ -64,7 +121,7 @@ module.exports = {
           csvWriter
             .writeRecords(dataInsert)
             .then(() => console.log("The CSV file was written successfully"));
-          res.status(200).json({ message: "Create" });
+          res.status(201).json({ message: "Create" });
         });
       }
     } catch (error) {
@@ -72,6 +129,57 @@ module.exports = {
     }
   },
 
+  /**
+   * @swagger
+   * /quote/{from}/{to}:
+   *  get:
+   *    tags:
+   *    - Peças
+   *    summary: 'Exibe uma Cotação de Viagem cadastradas'
+   *    description: 'Exibe uma Cotação de Viagem cadastradas'
+   *    produces:
+   *    - application/json
+   *    parameters:
+   *    - in: path
+   *      name: from
+   *      format: string
+   *      schema:
+   *        type: string
+   *      required: true
+   *      description: Partida da Viagem BRC
+   *    - in: path
+   *      name: to
+   *      format: string
+   *      schema:
+   *        type: string
+   *      required: true
+   *      description: Destino da Viagem CA
+   *    responses:
+   *       200:
+   *         description:
+   *         schema:
+   *          $ref: '#/definitions/Exibe_cotacao'
+   *       204:
+   *          description: "There are no registered data"
+   *       400:
+   *          description: "Incomplete data to seek travel budget"
+   *       415:
+   *          description: "Select failed"
+   * definitions:
+   *    Exibe_cotacao:
+   *       type: object
+   *       example:
+   *         route: "BRC,CA"
+   *         price: 10
+   *       properties:
+   *         route:
+   *            type: string
+   *         price:
+   *            type: number
+   *       xml:
+   *          name: 'Cotacao'
+   *
+   */
   async list(req, res) {
     const from = req.params.from.toUpperCase();
     const to = req.params.to.toUpperCase();
@@ -119,7 +227,7 @@ module.exports = {
         });
       }
     } catch (error) {
-      return res.status(415).json({ error: "Create failed" });
+      return res.status(415).json({ error: "Select failed" });
     }
   },
 };
