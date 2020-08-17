@@ -45,10 +45,10 @@ This Compose file contains the following environment variables:
 
 > **Run test**
 
-- `cd /cotacao_de_viagem/backend`
+- `cd cotacao_de_viagem/backend`
 - `npm test`
 
 > **Docker container access logs**
 
-- `cd /cotacao_de_viagem`
+- `cd cotacao_de_viagem`
 - `make logs`
