@@ -12,7 +12,6 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.use(router);
 app.listen(PORT, (HOST) => {
   console.log("Servidor em execução na porta " + PORT);
 });

@@ -13,7 +13,7 @@ class AppController {
   }
 
   routes() {
-    this.express.use("/api/v1", require("./routes/routes"));
+    this.express.use(require("./routes/routes"));
   }
 }
 
