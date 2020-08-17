@@ -104,4 +104,4 @@ dist
 
 # file CSV of routes
 .csv
-csv
+src/csv/routes.csv
