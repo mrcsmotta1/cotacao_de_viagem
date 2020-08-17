@@ -4,7 +4,7 @@
   "description": "Programa capaz de calcular o menor preço possível de passagens",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha src/test/cotacao.test.js --exit",
     "dev": "nodemon -- -r esm -r dotenv/config src/index.js",
     "start": "pm2 start src/index.js --watch --no-daemon --node-args=\"-r esm -r dotenv/config\""
   },
@@ -30,6 +30,10 @@
     "pm2": "^4.4.0"
   },
   "devDependencies": {
-    "dotenv": "^8.2.0"
+    "assert": "^2.0.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "dotenv": "^8.2.0",
+    "mocha": "^7.2.0"
   }
 }
