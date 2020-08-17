@@ -11,7 +11,7 @@ module.exports = {
       const to = req.body.to.toUpperCase();
       const price = req.body.price;
 
-      if (from == undefined || to == undefined || price == undefined) {
+      if (!from || !to || !price) {
         return res
           .status(400)
           .json({ message: "Incomplete data to save travel quote" });
@@ -100,7 +100,7 @@ module.exports = {
           if (numberLinesCount >= 1) {
             const checks = checkForSearch(numRow, dataExist);
             const checksMin = checkForMin(checks);
-            console.log("x", checks);
+
             if (checks.length > 0) {
               return res.status(200).json({
                 route: `${from},${to}`,
@@ -125,9 +125,9 @@ module.exports = {
 };
 
 function checkIfThereIs(arrayCsv, arrayInsert) {
-  let fromInsert = arrayInsert[0].from;
-  let toInsert = arrayInsert[0].to;
-  let priceInsert = arrayInsert[0].price;
+  let fromInsert = arrayInsert[0].From;
+  let toInsert = arrayInsert[0].To;
+  let priceInsert = arrayInsert[0].Price;
 
   let exist = _.filter(arrayCsv, {
     From: `${fromInsert}`,
