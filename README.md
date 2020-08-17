@@ -15,7 +15,7 @@
 ## Quick Start
 
 - Clone or download this repository
-- Go inside of directory `cd cotacao_de_viagem`
+- Go inside of directory, `cd cotacao_de_viagem`
 - Run this command `make up`
 
 ## Environments
@@ -47,3 +47,8 @@ This Compose file contains the following environment variables:
 
 - `cd /cotacao_de_viagem/backend`
 - `npm test`
+
+> **Docker container access logs**
+
+- `cd /cotacao_de_viagem`
+- `make logs`
