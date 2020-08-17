@@ -1,5 +1,20 @@
-import express from "express";
+const express = require("express");
 
-const app = express();
+class AppController {
+  constructor() {
+    this.express = express();
 
-export default app;
+    this.middlewares();
+    this.routes();
+  }
+
+  middlewares() {
+    this.express.use(express.json());
+  }
+
+  routes() {
+    this.express.use("/api/v1", require("./routes/routes"));
+  }
+}
+
+module.exports = new AppController().express;
