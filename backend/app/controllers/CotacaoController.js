@@ -108,6 +108,10 @@ export default {
                 route: `${from},${to}`,
                 price: checksMin.Price,
               });
+            } else {
+              return res
+                .status(204)
+                .json({ message: "There are no registered data" });
             }
           } else {
             return res
