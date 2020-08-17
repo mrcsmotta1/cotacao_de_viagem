@@ -97,8 +97,6 @@ export default {
           const numRow = await neatCsv(data);
           const numberLinesCount = Object.keys(numRow).length;
 
-          console.log(numberLinesCount);
-
           if (numberLinesCount >= 1) {
             const checks = checkForSearch(numRow, dataExist);
             const checksMin = checkForMin(checks);
